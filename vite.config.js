@@ -3,5 +3,5 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
-})
+  base: 'CodeStream_Live_Project', // Set the repository name
+});

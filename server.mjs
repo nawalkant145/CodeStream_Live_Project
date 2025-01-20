@@ -8,7 +8,7 @@ import { ACTIONS } from './src/Actions.mjs';
 
 
 const server = http.createServer(app);
-const io = new Server(server);
+// const io = new Server(server);
 
 
 
@@ -28,10 +28,15 @@ function getAllConnectedClients(roomId) {
     );
 }
 
+const io = new Server(server, {
+    cors: {
+        origin: "https://code-stream-live-project.vercel.app/",  // Allow all origins for testing, replace in production
+        methods: ["GET", "POST"],
+    }
+});
 
 io.on('connection', (socket) => {
     console.log('socket connected', socket.id);
-
 
     socket.on(ACTIONS.JOIN, ({ roomId, username }) => {
         userSocketMap[socket.id] = username;
@@ -46,13 +51,11 @@ io.on('connection', (socket) => {
         });
     });
 
-
     socket.on(ACTIONS.CODE_CHANGE, ({ roomId, code }) => {
          socket.in(roomId).emit(ACTIONS.CODE_CHANGE, { code });
      });
 
-
-     socket.on(ACTIONS.SYNC_CODE, ({ socketId, code }) => {
+    socket.on(ACTIONS.SYNC_CODE, ({ socketId, code }) => {
         io.to(socketId).emit(ACTIONS.CODE_CHANGE, { code });
     });
      
@@ -68,5 +71,6 @@ io.on('connection', (socket) => {
         socket.leave();
     });
 });
-  const PORT = process.env.PORT || 4000;
-  server.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+
+const PORT = process.env.PORT || 4000;
+server.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
