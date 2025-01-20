@@ -30,7 +30,8 @@ function getAllConnectedClients(roomId) {
 
 const io = new Server(server, {
     cors: {
-        origin: "https://code-stream-live-project.vercel.app/",  // Allow all origins for testing, replace in production
+        origin: "https://code-stream-live-project.vercel.app",
+ 
         methods: ["GET", "POST"],
     }
 });
