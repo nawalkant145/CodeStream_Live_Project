@@ -86,7 +86,25 @@ const io = new Server(server, {
     }
 });
 // Serve static files in production
+
+
+
+
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
+
+// Now you can use __dirname like in CommonJS:
 app.use(express.static(path.join(__dirname, 'dist')));
+
+
+
+
+
+
+
+
+
+
+
 
 // Get all connected clients in a room
 const userSocketMap = {};
