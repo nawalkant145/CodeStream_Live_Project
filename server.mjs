@@ -81,7 +81,7 @@ const server = http.createServer(app);
 // const io = new Server(server);
 const io = new Server(server, {
     cors: {
-        origin: "*", // Or specify the frontend origin
+        origin: "https://code-stream-live-project.vercel.app", // Or specify the frontend origin
         methods: ["GET", "POST"]
     }
 });
