@@ -3,17 +3,18 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
- "scripts": {
-  "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
-  "server:dev": "node server.mjs",
-  "client:dev": "vite",
-  "build": "vite build",
-  "server:prod": "node server.mjs",
-  "lint": "eslint .",
-  "preview": "vite preview"
-},
+  "scripts": {
+    "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
+    "server:dev": "node server.mjs",
+    "client:dev": "vite",
+    "build": "vite build",
+    "server:prod": "node server.mjs",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
   "dependencies": {
     "codemirror": "^5.65.18",
+    "cors": "^2.8.5",
     "express": "^4.21.2",
     "nodemon": "^3.1.9",
     "react": "^18.3.1",

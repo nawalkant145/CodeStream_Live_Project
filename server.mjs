@@ -78,8 +78,13 @@ import { ACTIONS } from './src/Actions.mjs';
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server);
-
+// const io = new Server(server);
+const io = new Server(server, {
+    cors: {
+        origin: "*", // Or specify the frontend origin
+        methods: ["GET", "POST"]
+    }
+});
 // Serve static files in production
 app.use(express.static(path.join(__dirname, 'dist')));
 
