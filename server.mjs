@@ -79,13 +79,20 @@ import { ACTIONS } from './src/Actions.mjs';
 const app = express();
 const server = http.createServer(app);
 // const io = new Server(server);
-const io = new Server(server, {
-    cors: {
-        origin: "https://code-stream-live-project.vercel.app", // Or specify the frontend origin
-        methods: ["GET", "POST"]
-    }
-});
+// const io = new Server(server, {
+//     cors: {
+//         origin: "https://code-stream-live-project.vercel.app", // Or specify the frontend origin
+//         methods: ["GET", "POST"]
+//     }
+// });
 // Serve static files in production
+const io = new Server(server, {
+  cors: {
+      origin: ["https://code-stream-live-project.vercel.app", "http://localhost:5173"], // Add frontend dev URL
+      methods: ["GET", "POST"]
+  }
+});
+
 
 
 
@@ -155,4 +162,6 @@ io.on('connection', (socket) => {
 });
 
 const PORT = process.env.PORT || 4000;
-server.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+// server.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+server.listen(PORT, '0.0.0.0', () => console.log(`Server running on http://0.0.0.0:${PORT}`));
+
